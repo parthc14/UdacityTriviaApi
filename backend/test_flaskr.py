@@ -30,11 +30,6 @@ class TriviaTestCase(unittest.TestCase):
         """Executed after reach test"""
         pass
 
-    """
-    TODO
-    Write at least one test for each test for successful operation and for expected errors.
-    """
-
     def test_retrieve_all_questions(self):
         res = self.client().get('/questions')
         data = json.loads(res.data)
@@ -86,8 +81,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['deleted'], str(question_id))
         self.assertEqual(question, None)
 
-
-     def test_422_deleting_non_existing_question(self):
+    def test_422_deleting_non_existing_question(self):
         res = self.client().delete('/questions/abc')
         data = json.loads(res.data)
 
@@ -95,7 +89,6 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'unprocessable')
 
-    
     def test_create_question(self):
         new_question = {
             'question': 'question',
@@ -166,7 +159,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_quiz_game(self):
         new_quiz = {'previous_questions': [],
-                          'quiz_category': {'type': 'Geography', 'id': 3}}
+                    'quiz_category': {'type': 'Geography', 'id': 3}}
 
         res = self.client().post('/quizzes', json=new_quiz)
         data = json.loads(res.data)
